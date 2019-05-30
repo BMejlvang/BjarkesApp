@@ -1,18 +1,7 @@
 const http = require('http');
 const port=process.env.PORT || 3000;
-
-const server = http.createServer((req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Content-Type', 'text/html');
-	
-});
-
-server.listen(port,() => {
-	console.log(`Server running at port `+port);
-});
-
 const MongoClient = require('mongodb').MongoClient;
-
+var textString="";
 
 // REMEMBER: escape('Calippo123#') -> "Calippo123%23"
 // the URI must be: "mongodb+srv://USERNAME:PASSWORD@CLUSTERNAME.mongodb.net/DBNAME"
@@ -42,12 +31,24 @@ client.connect(err => {
         console.log('and see the following items ');
         for (let i = 0; i < docs[0].Items.length; i++) {
             console.log((i + 1) + ' -> ' + docs[0].Items[i]);
+            textString += docs[0].Items[i];
         }
         console.log('---------------------------------------');
-        res.end('<h1>Hello World by Bjarke</h1><p>How are things? Cool stuff this Game! </p>');
     });
 
 });
+
+const server = http.createServer((req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Content-Type', 'text/html');
+	res.end('<h1>'+textString+'</p>');
+});
+
+server.listen(port,() => {
+	console.log(`Server running at port `+port);
+});
+
+
 
 
 console.log(' Started... (count to 15 while you wait for the connection to be established!) ');
