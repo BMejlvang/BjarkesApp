@@ -41,7 +41,7 @@ client.connect(err => {
 const server = http.createServer((req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Content-Type', 'text/html');
-	res.end('<h1>'+textString+'</p>');
+	res.end('<h1>Hello World by Bjarke</h1><p>'+textString+'</p>');
 });
 
 server.listen(port,() => {
