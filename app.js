@@ -7,7 +7,7 @@ var textString="";
 // the URI must be: "mongodb+srv://USERNAME:PASSWORD@CLUSTERNAME.mongodb.net/DBNAME"
 const uri = "mongodb+srv://BjarkeM:21616Bjarke@bjarkesapp-st1hy.mongodb.net/" + "roomDB";
 const client = new MongoClient(uri, { useNewUrlParser: true });
-
+const server = http.createServer((req, res) => {
 client.connect(err => {
     if (err) console.log(err);
 
@@ -38,7 +38,7 @@ client.connect(err => {
 
 });
 
-const server = http.createServer((req, res) => {
+
 	res.statusCode = 200;
 	res.setHeader('Content-Type', 'text/html');
 	res.end('<h1>Hello World by Bjarke</h1><p>'+textString+'</p>');
